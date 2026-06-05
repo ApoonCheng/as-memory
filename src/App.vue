@@ -193,7 +193,14 @@ onUnmounted(() => {
       </p>
       <div class="member-row">
         <div v-for="m in members" :key="m.key" class="mini" :style="{ background: m.color }">
-          {{ m.emoji }}<span>{{ m.name }}</span>
+          <img
+            v-if="m.img && !imgError[m.key]"
+            :src="m.img"
+            :alt="m.name"
+            @error="imgError[m.key] = true"
+          />
+          <span v-else class="mini-emoji">{{ m.emoji }}</span>
+          <span class="mini-name">{{ m.name }}</span>
         </div>
       </div>
       <button class="big" @click="startGame">開始遊戲</button>

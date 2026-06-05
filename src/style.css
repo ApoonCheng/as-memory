@@ -59,11 +59,16 @@ body {
 .member-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 22px; }
 .mini {
   flex: 1; border: 2.5px solid var(--ink); border-radius: 12px;
-  color: #fff; font-size: 1.4rem; padding: 10px 0; font-weight: 800;
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  color: #fff; padding: 10px 4px; font-weight: 800;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
   box-shadow: 2px 2px 0 var(--ink);
 }
-.mini span { font-size: 0.75rem; }
+.mini img {
+  width: 46px; height: 46px; border-radius: 50%;
+  object-fit: cover; border: 2.5px solid #fff;
+}
+.mini-emoji { font-size: 1.8rem; line-height: 46px; }
+.mini-name { font-size: 0.75rem; }
 
 /* 按鈕 */
 button {
