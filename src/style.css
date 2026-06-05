@@ -23,12 +23,14 @@ body {
 .wrap {
   width: 100%;
   max-width: 540px;
-  padding: 20px 10px 36px;
+  padding: 16px 10px 20px;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-.head { text-align: center; margin-bottom: 18px; }
+.head { text-align: center; margin-bottom: 12px; }
 .head h1 { font-size: 1.75rem; font-weight: 900; margin: 0; }
 .hud {
   display: flex; justify-content: center; gap: 14px; margin-top: 10px;
@@ -91,12 +93,15 @@ button {
 
 /* 牌桌 */
 .board {
+  flex: 1;
+  min-height: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   gap: 12px;
 }
 .tile {
-  aspect-ratio: 4 / 5;
+  min-height: 0;
   perspective: 900px;
   cursor: pointer;
 }
