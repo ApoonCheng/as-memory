@@ -36,7 +36,7 @@ git init
 git add .
 git commit -m "美秀翻牌配對"
 git branch -M main
-git remote add origin https://github.com/你的帳號/miso-memory.git
+git remote add origin https://github.com/你的帳號/as-memory.git
 git push -u origin main
 ```
 

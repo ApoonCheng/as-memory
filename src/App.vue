@@ -14,11 +14,11 @@ const previewLeft = ref(PREVIEW_SECONDS)
 const elapsed = ref(0)
 const imgError = ref({})
 
-const best = ref(Number(localStorage.getItem('miso-memory-best')) || 0)
+const best = ref(Number(localStorage.getItem('as-memory-best')) || 0)
 
 // 排行榜
 const hasLeaderboard = !!supabase
-const playerName = ref(localStorage.getItem('miso-name') || '')
+const playerName = ref(localStorage.getItem('as-name') || '')
 const top = ref([])
 const loadingBoard = ref(false)
 const submitting = ref(false)
@@ -109,7 +109,7 @@ function finish() {
   phase.value = 'done'
   if (!best.value || elapsed.value < best.value) {
     best.value = elapsed.value
-    localStorage.setItem('miso-memory-best', String(elapsed.value))
+    localStorage.setItem('as-memory-best', String(elapsed.value))
   }
   if (hasLeaderboard) fetchTop()
 }
@@ -138,7 +138,7 @@ async function submitScore() {
   if (!supabase) return
   const name = (playerName.value || '匿名樂迷').trim().slice(0, 12)
   playerName.value = name
-  localStorage.setItem('miso-name', name)
+  localStorage.setItem('as-name', name)
   submitting.value = true
   boardError.value = ''
   const { error } = await supabase
