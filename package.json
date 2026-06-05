@@ -1,0 +1,20 @@
+{
+  "name": "miso-memory",
+  "version": "1.0.0",
+  "description": "美秀集團 翻牌配對記憶遊戲",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.107.0",
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.4.0"
+  }
+}
