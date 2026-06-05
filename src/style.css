@@ -104,6 +104,10 @@ button {
   min-height: 0;
   perspective: 900px;
   cursor: pointer;
+  touch-action: manipulation; /* 關掉雙擊縮放延遲 */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .tile-inner {
   position: relative;

@@ -215,7 +215,7 @@ onUnmounted(() => {
         :key="card.id"
         class="tile"
         :class="{ up: isUp(card), matched: card.matched }"
-        @click="flip(card)"
+        @pointerdown="flip(card)"
       >
         <div class="tile-inner">
           <div class="tile-face back">🎵</div>
