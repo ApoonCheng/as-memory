@@ -3,7 +3,7 @@ import { ref, computed, onUnmounted } from 'vue'
 import { members, memberMap, previewMembers } from './members'
 import { supabase } from './lib/supabase'
 
-const PREVIEW_SECONDS = 3
+const PREVIEW_SECONDS = 4
 
 const phase = ref('ready') // ready | preview | playing | done | board
 const cards = ref([])
