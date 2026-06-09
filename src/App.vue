@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onUnmounted } from 'vue'
-import { members, memberMap } from './members'
+import { members, memberMap, previewMembers } from './members'
 import { supabase } from './lib/supabase'
 
 const PREVIEW_SECONDS = 2
@@ -188,11 +188,11 @@ onUnmounted(() => {
     <div v-if="phase === 'ready'" class="card center">
       <div class="badge">記憶力大考驗</div>
       <p class="sub">
-        畫面會先秀出 4 位團員的卡片（各 2 張），{{ PREVIEW_SECONDS }} 秒後翻面。<br />
-        憑記憶把同一位團員的兩張配成對，全部配完計時最快！
+        畫面會先秀出 16 張卡片（4 位團員、每人 2 張不同照片），{{ PREVIEW_SECONDS }} 秒後翻面。<br />
+        憑記憶把相同的兩張配成對，全部配完計時最快！
       </p>
       <div class="member-row">
-        <div v-for="m in members" :key="m.key" class="mini" :style="{ background: m.color }">
+        <div v-for="m in previewMembers" :key="m.key" class="mini" :style="{ background: m.color }">
           <img
             v-if="m.img && !imgError[m.key]"
             :src="m.img"
