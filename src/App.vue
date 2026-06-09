@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { members, memberMap, previewMembers } from './members'
 import { supabase } from './lib/supabase'
 
@@ -141,15 +141,20 @@ async function submitScore() {
   localStorage.setItem('as-name', name)
   submitting.value = true
   boardError.value = ''
-  const { error } = await supabase
-    .from('leaderboard')
-    .insert({ name, time_seconds: Number(elapsed.value.toFixed(1)), moves: moves.value })
-  if (error) boardError.value = error.message
-  else {
-    submitted.value = true
-    await fetchTop()
+  try {
+    const { error } = await supabase
+      .from('leaderboard')
+      .insert({ name, time_seconds: Number(elapsed.value.toFixed(1)), moves: moves.value })
+    if (error) boardError.value = '上傳失敗：' + error.message
+    else {
+      submitted.value = true
+      await fetchTop()
+    }
+  } catch (e) {
+    boardError.value = '上傳失敗：' + (e.message || e)
+  } finally {
+    submitting.value = false
   }
-  submitting.value = false
 }
 
 function openBoard() {
@@ -168,9 +173,13 @@ async function share() {
   } catch { /* 取消 */ }
 }
 
+const blockContextMenu = (e) => e.preventDefault()
+onMounted(() => window.addEventListener('contextmenu', blockContextMenu))
+
 onUnmounted(() => {
   clearInterval(timerId)
   clearInterval(previewId)
+  window.removeEventListener('contextmenu', blockContextMenu)
 })
 </script>
 
@@ -243,12 +252,12 @@ onUnmounted(() => {
       <p v-if="isNewBest" class="newbest">✨ 刷新個人紀錄！</p>
 
       <!-- 上傳成績 -->
-      <div v-if="hasLeaderboard && !submitted" class="submit-box">
-        <input v-model="playerName" maxlength="12" placeholder="輸入暱稱上榜" />
-        <button class="big" :disabled="submitting" @click="submitScore">
+      <form v-if="hasLeaderboard && !submitted" class="submit-box" @submit.prevent="submitScore">
+        <input v-model="playerName" maxlength="12" placeholder="輸入暱稱上榜" enterkeyhint="send" />
+        <button type="submit" class="big" :disabled="submitting">
           {{ submitting ? '上傳中…' : '上傳成績' }}
         </button>
-      </div>
+      </form>
       <p v-if="boardError" class="err">{{ boardError }}</p>
 
       <!-- 上傳後顯示排行榜 -->

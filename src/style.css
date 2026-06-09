@@ -18,7 +18,17 @@ body {
   background-size: 22px 22px;
   display: flex;
   justify-content: center;
+  /* 手機：禁雙擊縮放、長按選單、點按反白、下拉重新整理 */
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
 }
+
+/* 暱稱輸入框仍可正常選取/輸入 */
+input { user-select: text; -webkit-user-select: text; }
 
 .wrap {
   width: 100%;
