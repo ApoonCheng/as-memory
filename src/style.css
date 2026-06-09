@@ -12,7 +12,9 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   background: var(--paper);
   background-image: radial-gradient(var(--yellow) 1.5px, transparent 1.5px);
   background-size: 22px 22px;
@@ -33,11 +35,12 @@ input { user-select: text; -webkit-user-select: text; }
 .wrap {
   width: 100%;
   max-width: 540px;
-  padding: 16px 10px 20px;
+  padding: 12px 10px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto; /* 只有結果/排行榜過長時才在框內捲動，遊戲畫面剛好滿版 */
 }
 
 .head { text-align: center; margin-bottom: 12px; }
